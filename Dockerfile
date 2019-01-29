@@ -1,8 +1,13 @@
-FROM purplekarrot/base:latest
+FROM debian:sid
 
-RUN echo 'deb http://ftp.debian.org/debian experimental main' >> /etc/apt/sources.list \
-    && apt-get -qq update \
-    && apt-get -qq -t experimental install -y --no-install-recommends g++-8 \
+RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
+        ca-certificates \
+        cmake \
+        ninja-build \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
+        g++-8 \
     && rm -rf /var/lib/apt/lists/*
 
 ENV CC="/usr/bin/gcc-8" \
