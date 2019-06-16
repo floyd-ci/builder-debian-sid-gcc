@@ -6,11 +6,13 @@ RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
         ninja-build \
     && rm -rf /var/lib/apt/lists/*
 
+ARG GCC_VERSION
+
 RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
-        g++-8 \
+        g++-${GCC_VERSION} \
     && rm -rf /var/lib/apt/lists/*
 
-ENV CC="/usr/bin/gcc-8" \
-    CXX="/usr/bin/g++-8" \
-    COVERAGE_COMMAND="/usr/bin/gcov-8" \
+ENV CC="/usr/bin/gcc-${GCC_VERSION}" \
+    CXX="/usr/bin/g++-${GCC_VERSION}" \
+    COVERAGE_COMMAND="/usr/bin/gcov-${GCC_VERSION}" \
     COVERAGE_FLAGS="--coverage"
