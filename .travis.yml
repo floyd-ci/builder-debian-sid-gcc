@@ -3,9 +3,10 @@ language: minimal
 env:
   - GCC_VERSION=7
   - GCC_VERSION=8
+  - GCC_VERSION=9 EXPERIMENTAL=1
 
 script:
-  - docker build --build-arg GCC_VERSION=$GCC_VERSION --tag gcc-$GCC_VERSION .
+  - docker build --build-arg GCC_VERSION=$GCC_VERSION --build-arg EXPERIMENTAL=$EXPERIMENTAL --tag gcc-$GCC_VERSION .
 
 after_success:
   - docker tag gcc-$GCC_VERSION floydci/debian-sid-gcc:$GCC_VERSION
